@@ -69,7 +69,7 @@ class OpenShiftResourceAllocator(base.ResourceAllocator):
             raise ApiException(f"{response.status_code}: {response.text}")
 
     def create_project(self, project_name):
-        project_id = uuid.uuid4().hex
+        project_id = utils.get_unique_project_name(project_name, max_length=63)
         self._create_project(project_name, project_id)
         return project_id
 
